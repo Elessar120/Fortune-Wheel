@@ -10,7 +10,6 @@ using UnityEngine.UI;
         /// </summary>
         /// <param name="value"></param>
 
-        public static Action<int> OnUpdateUI;
         public static Action OnSpinStart;
 
         private void Start()
@@ -22,12 +21,13 @@ using UnityEngine.UI;
 
             spinButton.onClick.AddListener(() =>
             {
-                OnUpdateUI?.Invoke(-1);
                 OnSpinStart?.Invoke();
                 HideButton();
             });
-            Roulette.OnSpinEnd += ShowButton;
-            
+            Rotator.OnLoseGame += HideButton;
+            Rotator.OnWin += HideButton;
+            Rotator.OnSpinEnd += ShowButton;
+            Rotator.OnStartGame += ShowButton;
         }
 
         private void OnDestroy()

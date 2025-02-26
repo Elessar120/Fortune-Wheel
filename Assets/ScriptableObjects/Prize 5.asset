@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff7c7930b186468280dc2348a9c10ea6, type: 3}
+  m_Name: Prize 5
+  m_EditorClassIdentifier: 
+  ID: 5
+  Icon: {fileID: 21300000, guid: 911d761be739177408547bb2f9fe3dfd, type: 3}
+  Type: 0
+  Amount: 0

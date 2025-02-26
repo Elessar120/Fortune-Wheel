@@ -1,26 +1,19 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class SpinCounterUI : MonoBehaviour
 {
    [SerializeField] private TextMeshProUGUI spinCountText;
-   [SerializeField] private int maxSpins;
-   private int currentSpin;
 
    private void Start()
    {
       if (spinCountText == null) spinCountText = GetComponentInChildren<TextMeshProUGUI>();
-      currentSpin = maxSpins;
-      spinCountText.text = maxSpins.ToString();
-      FortuneWheelSpinClickHandler.OnUpdateUI += UpdateSpinCount;
+      Rotator.OnUpdateUI += SetText;
    }
-   private void UpdateSpinCount(int value)
+
+   private void SetText()
    {
-      currentSpin += value;
-      if (currentSpin <= 0)
-      {
-         currentSpin = 0;
-      }
-      spinCountText.text = currentSpin.ToString();
+      spinCountText.text = Rotator.currentSpin.ToString();
    }
 }
