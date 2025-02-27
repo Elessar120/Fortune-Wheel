@@ -9,7 +9,7 @@ public class SpinCounterUI : MonoBehaviour
    private void Start()
    {
       if (spinCountText == null) spinCountText = GetComponentInChildren<TextMeshProUGUI>();
-      Rotator.OnUpdateUI += SetText;
+      FindFirstObjectByType<Rotator>().OnUpdateUI += SetText;
    }
 
    private void SetText()

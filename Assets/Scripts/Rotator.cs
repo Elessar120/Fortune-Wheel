@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DefaultNamespace;
 using ScriptableObjects;
 using UnityEngine;
@@ -6,65 +7,74 @@ using Random = UnityEngine.Random;
 
 public class Rotator : MonoBehaviour
 {
+    #region Actions
+    public  Action OnSpinEnd;
+    public  Action OnLoseOneSpin;// can fill with things like particles
+    public  Action OnWinGame;
+    public  Action OnExtraChance;// can fill with things like particles
+    public  Action OnUpdateUI;
+    public  Action OnLoseGame;
+    public  Action OnStartGame;
+    public  Action<bool> OnSaveGameResult;
+    #endregion
+    #region Fields
+
+    [SerializeField] private float delayToGivePrize = .5f;
+    private float time;
+    [Header("Wheel Data")]
+    private bool isRotating;
+    public static int currentSpin;
     [SerializeField] float minRotatePower;
     [SerializeField] float maxRotatePower;
     [SerializeField] float StopPower;
-    //negative for lose chance and positive for extra chance
-    [SerializeField] private int eachSpinCost = -1;
     [SerializeField] Rigidbody2D rigidbody2D;
-    public static Action OnSpinEnd;
-    public static Action OnLoseOneSpin;
-    public static Action OnWin;
-    public static Action OnExtraChance;
-    public static Action OnUpdateUI;
-    public static Action OnLoseGame;
-    public static Action OnStartGame;
-    public static Action<bool> OnEndGame;
-    private bool isRotating;
-    private int rewardNumber;
     [SerializeField] PrizeData[] prizes;
     [SerializeField] private int maxSpins;
-    public static int currentSpin;
-
+    #endregion
     private void Start()
     {
-        rewardNumber = 0;
-        currentSpin = maxSpins;
+        ResetSpinCounts();
         if(rigidbody2D == null) rigidbody2D = GetComponent<Rigidbody2D>();
-        FortuneWheelSpinClickHandler.OnSpinStart += Rotate;
         OnUpdateUI?.Invoke();
     }
 
-    float t;
     private void FixedUpdate()
     {           
-        
+        CheckSpinStatus();
+    }
+
+    void CheckSpinStatus()
+    {
         if (rigidbody2D.angularVelocity > 0)
         {
-            rigidbody2D.angularVelocity -= StopPower*Time.deltaTime;
-
-            rigidbody2D.angularVelocity =  Mathf.Clamp(rigidbody2D.angularVelocity, 0 , maxRotatePower);
+            StopWheel();
         }
 
-        if(rigidbody2D.angularVelocity == 0 && isRotating == true) 
+        if (rigidbody2D.angularVelocity == 0 && isRotating && (time += Time.deltaTime) >= delayToGivePrize)
         {
-            t +=1*Time.deltaTime;// use coroutine
-            if(t >= 0.5f)
-            {
-                GetReward();
-
-                isRotating = false;
-                t = 0;
-            }
+           GivePrize();
         }
     }
 
+    void GivePrize()
+    {
+        GetReward(); 
+        isRotating = false; 
+        time = 0;
+        
+    }
+    private void StopWheel()
+    {
+        rigidbody2D.angularVelocity -= StopPower*Time.deltaTime;
 
-    private void Rotate() 
+        rigidbody2D.angularVelocity =  Mathf.Clamp(rigidbody2D.angularVelocity, 0 , maxRotatePower);
+    }
+
+
+    public void Rotate() 
     {
         if(isRotating == false)
         {
-            UpdateSpinChances(eachSpinCost);
             rigidbody2D.AddTorque(Random.Range(minRotatePower, maxRotatePower));
             isRotating = true;
         }
@@ -75,6 +85,7 @@ public class Rotator : MonoBehaviour
     {
         float rotation = transform.eulerAngles.z;
         int prizeArea = (int)(rotation / 30) + 1; // +1 because PrizeData IDs start at 1
+        Debug.Log($"Rotation: {rotation}, PrizeArea: {prizeArea}");
         bool isWinner = false;
         
         foreach (var prize in prizes)
@@ -100,7 +111,7 @@ public class Rotator : MonoBehaviour
         // Check if the game is over.
         if (IsGameOver())
         {
-            OnEndGame?.Invoke(false);
+            OnSaveGameResult?.Invoke(false);
             OnLoseGame?.Invoke();
         }
         // If no win occurred, call OnSpinEnd to re-enable the spin button.
@@ -112,6 +123,7 @@ public class Rotator : MonoBehaviour
         // If a win occurred, update the UI (if needed) but don't re-enable the spin button.
         else
         {
+            OnSaveGameResult?.Invoke(false);
             OnUpdateUI?.Invoke();
         }
     }
@@ -140,24 +152,27 @@ public class Rotator : MonoBehaviour
     private void Lose(PrizeData prize)
     {
         OnLoseOneSpin?.Invoke();
-
+        UpdateSpinChances(prize.Amount);
     }
 
     private void Win(PrizeData prize)
     {
-        OnEndGame?.Invoke(true);
-        OnWin?.Invoke();
+        OnWinGame?.Invoke();
     }
 
     public void ResetGame()
     {
-        currentSpin = maxSpins;
+        ResetSpinCounts();
         OnStartGame?.Invoke();
         OnUpdateUI?.Invoke();
         gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
         // todo: Save Game
     }
 
+    private void ResetSpinCounts()
+    {
+        currentSpin = maxSpins;
+    }
    
 
 }

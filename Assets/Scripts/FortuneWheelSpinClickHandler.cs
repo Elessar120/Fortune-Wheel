@@ -10,7 +10,7 @@ using UnityEngine.UI;
         /// </summary>
         /// <param name="value"></param>
 
-        public static Action OnSpinStart;
+        public Action OnSpinStart;
 
         private void Start()
         {
@@ -24,10 +24,10 @@ using UnityEngine.UI;
                 OnSpinStart?.Invoke();
                 HideButton();
             });
-            Rotator.OnLoseGame += HideButton;
-            Rotator.OnWin += HideButton;
-            Rotator.OnSpinEnd += ShowButton;
-            Rotator.OnStartGame += ShowButton;
+            FindFirstObjectByType<Rotator>().OnLoseGame += HideButton;
+            FindFirstObjectByType<Rotator>().OnWinGame += HideButton;
+            FindFirstObjectByType<Rotator>().OnSpinEnd += ShowButton;
+            FindFirstObjectByType<Rotator>().OnStartGame += ShowButton;
         }
 
         private void OnDestroy()

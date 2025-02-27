@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
     public class PlayersResultsManager : MonoBehaviour
     {
@@ -6,7 +5,7 @@ using UnityEngine;
 
         private void Start()
         {
-            Rotator.OnEndGame += SaveGameResult;
+            FindFirstObjectByType<Rotator>().OnSaveGameResult += SaveGameResult;
         }
 
         private void SaveGameResult(bool playerWon)
@@ -30,7 +29,6 @@ using UnityEngine;
                 string json = PlayerPrefs.GetString(GameResultsKey);
                 return JsonUtility.FromJson<GameResultsData>(json);
             }
-            // If not found, return a new instance with default values (0)
             return new GameResultsData();
         }
 

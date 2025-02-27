@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Prize 5
   m_EditorClassIdentifier: 
   ID: 5
-  Icon: {fileID: 21300000, guid: 911d761be739177408547bb2f9fe3dfd, type: 3}
   Type: 0
-  Amount: 0
+  Amount: -1
