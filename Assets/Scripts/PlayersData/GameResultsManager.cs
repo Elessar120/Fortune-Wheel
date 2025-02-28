@@ -1,27 +1,46 @@
 using UnityEngine;
-    public class PlayersResultsManager : MonoBehaviour
+    public class GameResultsManager : MonoBehaviour
     {
         private const string GameResultsKey = "GameResults";
+        IRotate rotate;
+        private void Awake()
+        {
+            GameObject wheel = GameObject.FindWithTag("Wheel");
+
+            if (wheel != null)
+            {
+                rotate = wheel.GetComponent<IRotate>();
+            }
+            else
+            {
+                Debug.LogError("Wheel GameObject not found! Ensure it has the correct tag.");
+            }
+        }
 
         private void Start()
         {
-            FindFirstObjectByType<Rotator>().OnSaveGameResult += SaveGameResult;
+            rotate.OnSaveGameResult += SaveGameResult;
         }
 
         private void SaveGameResult(bool playerWon)
         {
             // Load existing data or create new if not found
             GameResultsData data = LoadGameResults();
-            data.totalPlayers++;
-            if (playerWon)
-            {
-                data.winners++;
-            }
+            data = AddPlayerToResults(data, playerWon);
             string json = JsonUtility.ToJson(data, true);
             PlayerPrefs.SetString(GameResultsKey, json);
             PlayerPrefs.Save();
         }
 
+        private GameResultsData AddPlayerToResults(GameResultsData data, bool playerWon)
+        {
+            data.totalPlayers++;
+            if (playerWon)
+            {
+                data.winners++;
+            }
+            return data;
+        }
         private GameResultsData LoadGameResults()
         {
             if (PlayerPrefs.HasKey(GameResultsKey))

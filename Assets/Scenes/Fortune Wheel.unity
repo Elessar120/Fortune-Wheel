@@ -321,23 +321,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &379270536 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3744613496596853323, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
-  m_PrefabInstance: {fileID: 997967589809613647}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &379270540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379270536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f29fbcae506e76045a081f1cdf154ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1029668978}
   m_Layer: 0
-  m_Name: FortuneSpinWheelUI
+  m_Name: Fortune Spin Wheel UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -921,23 +904,6 @@ Transform:
   - {fileID: 975204421}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1131674599 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1158398359089305775, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
-  m_PrefabInstance: {fileID: 3508213514122965379}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1131674603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131674599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f29fbcae506e76045a081f1cdf154ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1277529738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,6 +1164,39 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 4226585987455144163, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
   m_PrefabInstance: {fileID: 997967589809613647}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1560272950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1560272951}
+  m_Layer: 0
+  m_Name: Managers------------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1560272951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560272950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 197.18771, y: 321.02023, z: 36.080048}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2064860914}
+  - {fileID: 1664922605}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664922604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,12 +1222,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664922604}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -197.18771, y: -321.02023, z: -36.080048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1560272951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1664922606
 MonoBehaviour:
@@ -1259,9 +1258,11 @@ GameObject:
   - component: {fileID: 1756375085}
   - component: {fileID: 1756375084}
   - component: {fileID: 1756375087}
+  - component: {fileID: 1756375090}
+  - component: {fileID: 1756375089}
   m_Layer: 5
   m_Name: Wheel
-  m_TagString: Untagged
+  m_TagString: Wheel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1302,20 +1303,6 @@ MonoBehaviour:
   maxRotatePower: 1440
   StopPower: 200
   rigidbody2D: {fileID: 1756375085}
-  prizes:
-  - {fileID: 11400000, guid: e38b97432df16eb49a27fc16a3ae89b5, type: 2}
-  - {fileID: 11400000, guid: 4473a6b0787239d4b964ff78b3c150c6, type: 2}
-  - {fileID: 11400000, guid: 6fe2482b6a5092c41b23e522df434549, type: 2}
-  - {fileID: 11400000, guid: fe486653663250a479aa0c90ac46f287, type: 2}
-  - {fileID: 11400000, guid: 678e309f96d52484ebbe54964f9d045b, type: 2}
-  - {fileID: 11400000, guid: 9580778360380d048bfaccd40cb65e81, type: 2}
-  - {fileID: 11400000, guid: aae1e716c9df49e45b94b6a715831f2c, type: 2}
-  - {fileID: 11400000, guid: f7b195527b4f0f34eacac7ddc60136eb, type: 2}
-  - {fileID: 11400000, guid: fd80e875ab545a84d876b3dc25f0cfe9, type: 2}
-  - {fileID: 11400000, guid: d898361fcf4883145a367a62946359ba, type: 2}
-  - {fileID: 11400000, guid: 89be35012954b6441b18a896ffebeb04, type: 2}
-  - {fileID: 11400000, guid: 69fa731ac952a32438c42637cf594cb6, type: 2}
-  maxSpins: 10
 --- !u!50 &1756375085
 Rigidbody2D:
   serializedVersion: 5
@@ -1381,6 +1368,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1756375089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756375082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ab26bbdd904e80960e450459702150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpins: 10
+--- !u!114 &1756375090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756375082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19ec142b0d34d989abd82d037bb451c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prizes:
+  - {fileID: 11400000, guid: e38b97432df16eb49a27fc16a3ae89b5, type: 2}
+  - {fileID: 11400000, guid: 4473a6b0787239d4b964ff78b3c150c6, type: 2}
+  - {fileID: 11400000, guid: 6fe2482b6a5092c41b23e522df434549, type: 2}
+  - {fileID: 11400000, guid: fe486653663250a479aa0c90ac46f287, type: 2}
+  - {fileID: 11400000, guid: 678e309f96d52484ebbe54964f9d045b, type: 2}
+  - {fileID: 11400000, guid: 9580778360380d048bfaccd40cb65e81, type: 2}
+  - {fileID: 11400000, guid: aae1e716c9df49e45b94b6a715831f2c, type: 2}
+  - {fileID: 11400000, guid: f7b195527b4f0f34eacac7ddc60136eb, type: 2}
+  - {fileID: 11400000, guid: fd80e875ab545a84d876b3dc25f0cfe9, type: 2}
+  - {fileID: 11400000, guid: d898361fcf4883145a367a62946359ba, type: 2}
+  - {fileID: 11400000, guid: 89be35012954b6441b18a896ffebeb04, type: 2}
+  - {fileID: 11400000, guid: 69fa731ac952a32438c42637cf594cb6, type: 2}
 --- !u!1 &2064860913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,7 +1417,7 @@ GameObject:
   - component: {fileID: 2064860914}
   - component: {fileID: 2064860915}
   m_Layer: 0
-  m_Name: PlayersResultsManager
+  m_Name: PlayersSaveLoadManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1406,12 +1431,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064860913}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -197.18771, y: -321.02023, z: -36.080048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1560272951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2064860915
 MonoBehaviour:
@@ -1455,7 +1480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4233680433695958}
   m_Layer: 5
-  m_Name: FortuneSpinWheel
+  m_Name: Fortune Spin Wheel
   m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1626,29 +1651,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1744207263726839763, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
-      propertyPath: m_text
-      value: win rate
-      objectReference: {fileID: 0}
-    - target: {fileID: 1744207263726839763, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
-      propertyPath: m_fontSize
-      value: 72
-      objectReference: {fileID: 0}
     - target: {fileID: 2547528361652075666, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 4396538702967290085}
-    - target: {fileID: 4226585987455144163, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5171055868853445414, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
       propertyPath: m_Name
-      value: Lose
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389683591055878748, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 400
+      value: Lose Panel
       objectReference: {fileID: 0}
     - target: {fileID: 8713592185423229828, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
       propertyPath: m_TargetGraphic
@@ -1657,10 +1666,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3744613496596853323, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 379270540}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48aabe249910999449d19a5c76f3ae27, type: 3}
 --- !u!225 &1062805090064500221
 CanvasGroup:
@@ -1720,17 +1726,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1368935687431021683, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
-      propertyPath: m_text
-      value: win rate
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368935687431021683, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
-      propertyPath: m_fontSize
-      value: 72
-      objectReference: {fileID: 0}
     - target: {fileID: 1684897318354270410, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
       propertyPath: m_Name
-      value: Win
+      value: Win Panel
       objectReference: {fileID: 0}
     - target: {fileID: 4677893540256213403, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
       propertyPath: m_TargetGraphic
@@ -1776,14 +1774,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8140644191416560832, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8435812309429031694, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 400
-      objectReference: {fileID: 0}
     - target: {fileID: 8986638083369031597, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -1791,10 +1781,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1158398359089305775, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1131674603}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7426f99ac35033342a9ba7ecc795598e, type: 3}
 --- !u!114 &3515185439950677067
 MonoBehaviour:
@@ -2023,9 +2010,8 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 1277529741}
   - {fileID: 832575519}
+  - {fileID: 1560272951}
   - {fileID: 4233680433695958}
   - {fileID: 1029668978}
   - {fileID: 3508213514122965379}
   - {fileID: 997967589809613647}
-  - {fileID: 2064860914}
-  - {fileID: 1664922605}

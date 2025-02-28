@@ -1,40 +1,42 @@
-    using System;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
 
     public class UIManager : MonoBehaviour
     {
-        public static UIManager Instance;
 
         [Header("UI References")]
         [SerializeField] private Button spinButton;
         [SerializeField] private TextMeshProUGUI spinCountText;
         public CanvasGroup winCanvasGroup;
         public CanvasGroup loseCanvasGroup;
+        private IGameStates gameState;
+        private IRotate rotate;
         
         private void Awake()
         {
-            // Singleton implementation
-            if (Instance != null && Instance != this)
+            GameObject wheel = GameObject.FindWithTag("Wheel");
+
+            if (wheel != null)
             {
-                Destroy(gameObject);
-                return;
+                gameState = wheel.GetComponent<IGameStates>();
+                rotate = wheel.GetComponent<IRotate>();
             }
-            Instance = this;
+            else
+            {
+                Debug.LogError("Wheel GameObject not found! Ensure it has the correct tag.");
+            }
         }
 
         private void OnEnable()
         {
-            // Subscribe to Rotator events
-            Rotator rotator = FindObjectOfType<Rotator>();
-            if(rotator != null)
+            if(rotate != null)
             {
-                rotator.OnSpinEnd += ShowSpinButton;
-                rotator.OnWinGame += OnWin;
-                rotator.OnLoseGame += OnLoseGame;
-                rotator.OnStartGame += ShowSpinButton;
-                rotator.OnUpdateUI += UpdateSpinCounter;
+                rotate.OnSpinEnd += ShowSpinButton;
+                rotate.OnWinGame += OnWin;
+                rotate.OnLoseGame += OnLoseGame;
+                rotate.OnStartGame += ShowSpinButton;
+                rotate.OnUpdateUI += UpdateSpinCounter;
             }
 
             if(spinButton != null)
@@ -45,14 +47,13 @@
 
         private void OnDisable()
         {
-            Rotator rotator = FindObjectOfType<Rotator>();
-            if(rotator != null)
+            if(rotate != null)
             {
-                rotator.OnSpinEnd -= ShowSpinButton;
-                rotator.OnWinGame -= OnWin;
-                rotator.OnLoseGame -= OnLoseGame;
-                rotator.OnStartGame -= ShowSpinButton;
-                rotator.OnUpdateUI -= UpdateSpinCounter;
+                rotate.OnSpinEnd -= ShowSpinButton;
+                rotate.OnWinGame -= OnWin;
+                rotate.OnLoseGame -= OnLoseGame;
+                rotate.OnStartGame -= ShowSpinButton;
+                rotate.OnUpdateUI -= UpdateSpinCounter;
             }
             if(spinButton != null)
             {
@@ -62,28 +63,26 @@
 
         private void OnSpinButtonClicked()
         {
-            // Trigger a spin via the Rotator
-            Rotator rotator = FindObjectOfType<Rotator>();
-            if(rotator != null)
+            if(rotate != null)
             {
-                rotator.Rotate();
+                rotate.Rotate();
             }
             HideSpinButton();
         }
 
-        public void UpdateSpinCounter()
+        private void UpdateSpinCounter()
         {
             if(spinCountText != null)
-                spinCountText.text = Rotator.currentSpin.ToString();
+                spinCountText.text = gameState.currentSpin.ToString();
         }
 
-        public void ShowSpinButton()
+        private void ShowSpinButton()
         {
             if(spinButton != null)
                 spinButton.interactable = true;
         }
 
-        public void HideSpinButton()
+        private void HideSpinButton()
         {
             if(spinButton != null)
                 spinButton.interactable = false;
@@ -91,7 +90,6 @@
 
         private void OnWin()
         {
-            // Show win canvas and update UI accordingly
             if(winCanvasGroup != null)
             {
                 winCanvasGroup.alpha = 1;
@@ -104,7 +102,6 @@
 
         private void OnLoseGame()
         {
-            // Show lose canvas and update UI accordingly
             if(loseCanvasGroup != null)
             {
                 loseCanvasGroup.alpha = 1;
@@ -113,5 +110,26 @@
             }
             HideSpinButton();
             UpdateSpinCounter();
+        }
+        public void HandleTryAgainButton()
+        {
+            if (winCanvasGroup != null)
+            {
+                winCanvasGroup.alpha = 0;
+                winCanvasGroup.interactable = false;
+                winCanvasGroup.blocksRaycasts = false;
+            }
+
+            if (loseCanvasGroup != null)
+            {
+                loseCanvasGroup.alpha = 0;
+                loseCanvasGroup.interactable = false;
+                loseCanvasGroup.blocksRaycasts = false;
+            }
+
+            if (gameState != null)
+            {
+                gameState.ResetGame();
+            }
         }
     }
